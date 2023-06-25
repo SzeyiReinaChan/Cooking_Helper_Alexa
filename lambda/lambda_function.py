@@ -43,11 +43,11 @@ Step 3: Seal the bag and massage the marinade into the chicken.
 """
 TERIYAKI_CHICKEN_MARINADE = """
 The ingredients for TERIYAKI CHICKEN MARINADE Ingredients are follow:
-¼ cup tamari soy sauce (or coconut aminos)
+¼ cup tamari soy sauce
 1 tablespoons sesame oil
 1 tablespoon rice vinegar
 1 green onion, thinly sliced
-2 teaspoons minced fresh ginger (about ½-inch piece)
+2 teaspoons minced fresh ginger
 2 garlic cloves, minced
 
 Here are the steps for TERIYAKI CHICKEN MARINADE:
@@ -58,7 +58,7 @@ Step 3: Seal the bag and massage the marinade into the chicken.
 FAJITA_CHICKEN_MARINADE = """
 The ingredients for FAJITA CHICKEN MARINADE Ingredients are follow:
 ¼ cup olive oil
-1 lime, zested and juiced (about 2 tablespoons juice)
+1 lime, zested and juiced
 1 garlic clove, minced
 1 teaspoon chili powder
 1 teaspoon ground cumin
@@ -92,18 +92,17 @@ Step 6: Warp with Nori seaweed to finish.
 
 CHICKEN_AVOCADO_MANGO_SALAD = """
 The ingredients for Chicken Avocado Mango Salad are follow:
-1 lb chicken breasts, (2 medium)
-1/2 tsp garlic salt, or to taste
-1/8 tsp black pepper, or to taste
+1 lb chicken breasts(2 medium)
+1/2 tsp garlic salt or to taste
+1/8 tsp black pepper or to taste
 2 tsp olive oil
 6 cups romaine lettuce, 1 head, rinsed, chopped and spun dry
-1/2 cup cherry tomatoes, halved
-1/2 english cucumber, sliced
-1 mango, pitted, peeled and diced*
+1/2 cup cherry tomatoes halved
+1/2 english cucumber sliced
+1 mango, pitted, peeled and diced
 1 avocado, pitted, peeled and diced
 1/2 small purple onion, thinly sliced
-1/4 cup cilantro, chopped
-1/2 cup sliced almonds, toasted, for topping
+1/4 cup cilantro chopped
 
 Honey Vinaigrette Dressing:
 1/2 cup extra virgin olive oil
