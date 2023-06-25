@@ -25,7 +25,8 @@ import gspread
 load_dotenv()
 # ==== configure OpenAI ====
 openai.api_key = os.getenv("OPENAI_API_KEY")
-CHICKEN_MARINADES = """
+
+HONEY_MUSTARD_CHICKEN_MARINADE = """
 The ingredients for HONEY MUSTARD CHICKEN MARINADE are follow:
 3 tablespoons honey
 3 tablespoons Dijon mustard
@@ -35,6 +36,12 @@ The ingredients for HONEY MUSTARD CHICKEN MARINADE are follow:
 1 teaspoon kosher salt
 ½ teaspoon freshly ground black pepper
 
+Here are the steps for HONEY MUSTARD CHICKEN MARINADE:
+Step 1: Combine the ingredients for your chosen marinade in a small bowl and whisk to combine. 
+Step 2: Place the chicken in a large zip-top bag and pour in the marinade. 
+Step 3: Seal the bag and massage the marinade into the chicken. 
+"""
+TERIYAKI_CHICKEN_MARINADE = """
 The ingredients for TERIYAKI CHICKEN MARINADE Ingredients are follow:
 ¼ cup tamari soy sauce (or coconut aminos)
 1 tablespoons sesame oil
@@ -43,6 +50,12 @@ The ingredients for TERIYAKI CHICKEN MARINADE Ingredients are follow:
 2 teaspoons minced fresh ginger (about ½-inch piece)
 2 garlic cloves, minced
 
+Here are the steps for TERIYAKI CHICKEN MARINADE:
+Step 1: Combine the ingredients for your chosen marinade in a small bowl and whisk to combine. 
+Step 2: Place the chicken in a large zip-top bag and pour in the marinade. 
+Step 3: Seal the bag and massage the marinade into the chicken. 
+"""
+FAJITA_CHICKEN_MARINADE = """
 The ingredients for FAJITA CHICKEN MARINADE Ingredients are follow:
 ¼ cup olive oil
 1 lime, zested and juiced (about 2 tablespoons juice)
@@ -53,7 +66,7 @@ The ingredients for FAJITA CHICKEN MARINADE Ingredients are follow:
 1 teaspoon kosher salt
 ½ teaspoon freshly ground black pepper
 
-Here are the steps for all the chicken marinades:
+Here are the steps for FAJITA CHICKEN MARINADE:
 Step 1: Combine the ingredients for your chosen marinade in a small bowl and whisk to combine. 
 Step 2: Place the chicken in a large zip-top bag and pour in the marinade. 
 Step 3: Seal the bag and massage the marinade into the chicken. 
@@ -123,8 +136,8 @@ salad, adding it to taste.
 
 INSTRUCTIONS = f"""
 Your task is to help user to make one of the dishes listed below.
-The recipe that you know are: Chicken avocado mango salad, chicken marinades, tuna mayo onigiri rice ball.
-If user wants to make chicken marinades, ask user which marinade they want to make, and respond with the ingredients.
+The recipe that you know are: Chicken avocado mango salad, honey mustard chicken marinades, fajita chicken marinades, \
+tariyaki chicken marinades, tuna mayo onigiri rice ball.
 Ask user what recipe they want to make, and respond with the recipe.
 Only respond the steps for the recipe unless user ask for the ingredients.
 Present steps in a numbered list.
@@ -134,7 +147,7 @@ Please aim to be as helpful, creative, friendly, and educative as possible in al
 Only output strictly realted to the question, with nothing else.
 Every respond should be in complete sentence.
 Do not use any external URLs in your responses.
-Recipe = \'\'\'{CHICKEN_AVOCADO_MANGO_SALAD, CHICKEN_MARINADES, TUNA_MAYO_ONIGIRI_RICE_BALL}\'\'\'
+Recipe = \'\'\'{CHICKEN_AVOCADO_MANGO_SALAD, HONEY_MUSTARD_CHICKEN_MARINADE, FAJITA_CHICKEN_MARINADE,TERIYAKI_CHICKEN_MARINADE,TUNA_MAYO_ONIGIRI_RICE_BALL}\'\'\'
 """
 
 
@@ -165,7 +178,7 @@ class LaunchRequestHandler(AbstractRequestHandler):
 
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
-        speak_output = "Welcome to the cooking assistant. How can I help?"
+        speak_output = "Welcome to the cooking helper. How can I help?"
 
         worksheet = sh.get_worksheet(0)
         # worksheet.clear()
