@@ -26,127 +26,66 @@ load_dotenv()
 # ==== configure OpenAI ====
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
-HONEY_MUSTARD_CHICKEN_MARINADE = """
-The ingredients for HONEY MUSTARD CHICKEN MARINADE are follow:
-3 tablespoons honey
-3 tablespoons Dijon mustard
-2 tablespoons olive oil
-2 teaspoons apple cider vinegar
-1 garlic clove, minced
-1 teaspoon kosher salt
-½ teaspoon freshly ground black pepper
+RECIPE = """
+1. INGREDIENTS FOR CHICKEN AVOCADO MANGO SALAD
+- 1 lb chicken breasts or 2 medium
+- 1/2 tsp garlic salt or to taste
+- 1/8 tsp black pepper or to taste
+- 2 tsp olive oil
+- 6 cups romaine lettuce, 1 head, rinsed, chopped and spun dry
+- 1/2 cup cherry tomatoes halved
+- 1/2 english cucumber sliced
+- 1 mango, pitted, peeled and diced
+- 1 avocado, pitted, peeled and diced
+- 1/2 small purple onion, thinly sliced
+- 1/4 cup cilantro chopped
 
-Here are the steps for HONEY MUSTARD CHICKEN MARINADE:
-Step 1: Combine the ingredients for your chosen marinade in a small bowl and whisk to combine. 
-Step 2: Place the chicken in a large zip-top bag and pour in the marinade. 
-Step 3: Seal the bag and massage the marinade into the chicken. 
-"""
-TERIYAKI_CHICKEN_MARINADE = """
-The ingredients for TERIYAKI CHICKEN MARINADE Ingredients are follow:
-¼ cup tamari soy sauce
-1 tablespoons sesame oil
-1 tablespoon rice vinegar
-1 green onion, thinly sliced
-2 teaspoons minced fresh ginger
-2 garlic cloves, minced
-
-Here are the steps for TERIYAKI CHICKEN MARINADE:
-Step 1: Combine the ingredients for your chosen marinade in a small bowl and whisk to combine. 
-Step 2: Place the chicken in a large zip-top bag and pour in the marinade. 
-Step 3: Seal the bag and massage the marinade into the chicken. 
-"""
-FAJITA_CHICKEN_MARINADE = """
-The ingredients for FAJITA CHICKEN MARINADE Ingredients are follow:
-¼ cup olive oil
-1 lime, zested and juiced
-1 garlic clove, minced
-1 teaspoon chili powder
-1 teaspoon ground cumin
-½ teaspoon paprika
-1 teaspoon kosher salt
-½ teaspoon freshly ground black pepper
-
-Here are the steps for FAJITA CHICKEN MARINADE:
-Step 1: Combine the ingredients for your chosen marinade in a small bowl and whisk to combine. 
-Step 2: Place the chicken in a large zip-top bag and pour in the marinade. 
-Step 3: Seal the bag and massage the marinade into the chicken. 
-"""
-
-TUNA_MAYO_ONIGIRI_RICE_BALL = """
-The ingredients for Tuna Mayo Onigiri Rice Ball are follow:
-Cooked rice
-Nori seaweed
-Canned tuna
-1 tsp salt
-1 tsp soy sauce
-1tbsp Japanese mayonnaise
-
-Here are the steps for making Tuna Mayo Onigiri Rice Ball:
-Step 1: Mix tuna, Japanese mayo, and soy sauce in a bowl. 
-Step 2: Fold a Nori seaweed into 3. 
-Step 3: Wet your hands with water, then rub salt into your hand.
-Step 4: Take a palm of warm rice in one hand.
-Step 5: Make a dent in the middle of the rice and put in the tuna mixture, then press and form a triangle shape.
-Step 6: Warp with Nori seaweed to finish.
-"""
-
-CHICKEN_AVOCADO_MANGO_SALAD = """
-The ingredients for Chicken Avocado Mango Salad are follow:
-1 lb chicken breasts(2 medium)
-1/2 tsp garlic salt or to taste
-1/8 tsp black pepper or to taste
-2 tsp olive oil
-6 cups romaine lettuce, 1 head, rinsed, chopped and spun dry
-1/2 cup cherry tomatoes halved
-1/2 english cucumber sliced
-1 mango, pitted, peeled and diced
-1 avocado, pitted, peeled and diced
-1/2 small purple onion, thinly sliced
-1/4 cup cilantro chopped
-
-Honey Vinaigrette Dressing:
-1/2 cup extra virgin olive oil
-3 Tbsp apple cider vinegar
-2 tsp dijon mustard
-2 tsp honey
-1 garlic clove, 1 tsp minced
-1 tsp sea salt
-1/4 tsp black pepper, or to taste
-
-Here are the steps for making Chicken Mango Avocado Salad:
-Step 1: In a large salad bowl, add chopped romaine. 
-Step 2: Top with halved cherry tomatoes, sliced cucumber, diced mango and avocado, \
+STEPS
+- Step 1: In a large salad bowl, add chopped romaine. 
+- Step 2: Top with halved cherry tomatoes, sliced cucumber, diced mango and avocado, \
 thinly sliced purple onion, 1/4 cup cilantro, and chicken breast.
 
-For the next step of making Honey Vinaigrette Dressing, the ingredients are below:
-1/2 cup extra virgin olive oil
-3 Tbsp apple cider vinegar
-2 tsp dijon mustard
-2 tsp honey
-1 garlic clove, 1 tsp minced
-1 tsp sea salt
-1/4 tsp black pepper, or to taste
+INGREDIENTS FOR HONEY VINAIGRETTE DRESSING
+- 1/2 cup extra virgin olive oil
+- 3 Tbsp apple cider vinegar
+- 2 tsp dijon mustard
+- 2 tsp honey
+- 1 garlic clove or 1 tsp minced
+- 1 tsp sea salt
+- 1/4 tsp black pepper, or to taste
 
-Step 3: Combine the Honey Vinaigrette Dressing Ingredients in a mason jar, cover tightly with lid and 
+- Step 3: Combine the Honey Vinaigrette Dressing Ingredients in a mason jar, cover tightly with lid and 
 shake together until well combined. 
-Step 4: Drizzle the salad dressing over the chicken mango avocado 
-salad, adding it to taste.
+- Step 4: Drizzle the salad dressing over the chicken mango avocado salad, adding it to taste.
 """
 
 INSTRUCTIONS = f"""
-Your task is to help user to make one of the dishes listed below.
-The recipe that you know are: Chicken avocado mango salad, honey mustard chicken marinades, fajita chicken marinades, \
-tariyaki chicken marinades, tuna mayo onigiri rice ball.
-Ask user what recipe they want to make, and respond with the recipe.
-Only respond the steps for the recipe unless user ask for the ingredients.
-Present steps in a numbered list.
-If user ask for other recipes, you can respond with "I don't know how to make that dish, sorry."
-Respond user questions based on the recipe delimited by triple backticks, respond user in at most 30 words.
-Please aim to be as helpful, creative, friendly, and educative as possible in all of your responses.
-Only output strictly realted to the question, with nothing else.
-Every respond should be in complete sentence.
+Your task is to help and teach user to make the chicken avocado mango salad based on the Recipe step by step.
+Respond user questions based on the recipe delimited by triple backticks.
+Recipe = \'\'\'{RECIPE}\'\'\'
+
+Follow these steps to answer the customer queries.
+
+Step 1:  First decide whether the user is \
+asking a question about a specific ingredients or recipe steps.
+
+Step 2: If the user is asking about specific ingredients, identify whether \
+the ingredients is for the salad or the dressing.
+
+Step 3: If the user is asking about specific steps, identify which step user is in\
+and then determine the next step.
+
+Steps4: Use at most 40 words for the responses. Please aim to be as \
+helpful, creative, friendly, and educative as possible in all of your responses.\
+Every respond should be in complete sentence.\
 Do not use any external URLs in your responses.
-Recipe = \'\'\'{CHICKEN_AVOCADO_MANGO_SALAD, HONEY_MUSTARD_CHICKEN_MARINADE, FAJITA_CHICKEN_MARINADE,TERIYAKI_CHICKEN_MARINADE,TUNA_MAYO_ONIGIRI_RICE_BALL}\'\'\'
+
+Use the following format:
+Step 1:<step 1 reasoning>
+Step 2:<step 2 reasoning>
+Step 3:<step 3 reasoning>
+Step 4:<step 4 reasoning>
+Response to user:<response to customer>
 """
 
 
@@ -177,7 +116,7 @@ class LaunchRequestHandler(AbstractRequestHandler):
 
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
-        speak_output = "Welcome to the cooking helper. How can I help?"
+        speak_output = "Welcome to the salad helper. How can I help?"
 
         worksheet = sh.get_worksheet(0)
         # worksheet.clear()
@@ -197,25 +136,6 @@ class LaunchRequestHandler(AbstractRequestHandler):
             .response
         )
 
-
-# class HelloWorldIntentHandler(AbstractRequestHandler):
-#     """Handler for Hello World Intent."""
-#     def can_handle(self, handler_input):
-#         # type: (HandlerInput) -> bool
-#         return ask_utils.is_intent_name("HelloWorldIntent")(handler_input)
-
-#     def handle(self, handler_input):
-#         # type: (HandlerInput) -> Response
-#         speak_output = "Hello World!"
-
-#         return (
-#             handler_input.response_builder
-#                 .speak(speak_output)
-#                 # .ask("add a reprompt if you want to keep the session open for the user to respond")
-#                 .response
-#         )
-
-
 class AskChatGPTIntentHandler(AbstractRequestHandler):
     """Handler for Hello World Intent."""
 
@@ -230,7 +150,8 @@ class AskChatGPTIntentHandler(AbstractRequestHandler):
         new_question = handler_input.request_envelope.request.intent.slots["question"].value
 
         messages = [
-            {"role": "system", "content": INSTRUCTIONS},
+            {"role": "system", 
+            "content": INSTRUCTIONS},
         ]
 
         for question, answer in CHAT_HISTORY[-MAX_CONTEXT_QUESTIONS:]:
@@ -402,7 +323,6 @@ sb = SkillBuilder()
 
 sb.add_request_handler(LaunchRequestHandler())
 sb.add_request_handler(AskChatGPTIntentHandler())
-# sb.add_request_handler(HelloWorldIntentHandler())
 sb.add_request_handler(HelpIntentHandler())
 sb.add_request_handler(CancelOrStopIntentHandler())
 sb.add_request_handler(FallbackIntentHandler())
