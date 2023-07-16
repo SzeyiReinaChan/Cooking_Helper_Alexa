@@ -136,6 +136,7 @@ class LaunchRequestHandler(AbstractRequestHandler):
             .response
         )
 
+
 class AskChatGPTIntentHandler(AbstractRequestHandler):
     """Handler for Hello World Intent."""
 
@@ -150,8 +151,8 @@ class AskChatGPTIntentHandler(AbstractRequestHandler):
         new_question = handler_input.request_envelope.request.intent.slots["question"].value
 
         messages = [
-            {"role": "system", 
-            "content": INSTRUCTIONS},
+            {"role": "system",
+             "content": INSTRUCTIONS},
         ]
 
         for question, answer in CHAT_HISTORY[-MAX_CONTEXT_QUESTIONS:]:
