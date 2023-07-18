@@ -61,31 +61,34 @@ shake together until well combined.
 
 INSTRUCTIONS = f"""
 Your task is to help and teach user to make the chicken avocado mango salad based on the Recipe step by step.
+Follow these steps to answer the customer queries.
+
 Respond user questions based on the recipe delimited by triple backticks.
 Recipe = \'\'\'{RECIPE}\'\'\'
 
 Follow these steps to answer the customer queries.
 
-Step 1:  First decide whether the user is \
-asking a question about a specific ingredients or recipe steps.
+Step 1:   First decide whether the user is \
+asking a question about a specific ingredients or recipe steps or other.
 
-Step 2: If the user is asking about specific ingredients, identify whether \
+Step 2:  If the user is asking about specific ingredients, identify whether \
 the ingredients is for the salad or the dressing.
 
-Step 3: If the user is asking about specific steps, identify which step user is in\
-and then determine the next step.
+Step 3:  If the user is asking about specific steps, \
+identify what step of the recipe the user is working on.
 
-Steps4: Use at most 40 words for the responses. Please aim to be as \
+Steps4:  Use at most 30 words for the responses. Please aim to be as \
 helpful, creative, friendly, and educative as possible in all of your responses.\
 Every respond should be in complete sentence.\
-Do not use any external URLs in your responses.
+Do not use any external information other than recipe provided in your responses.
 
 Use the following format:
-Step 1:<step 1 reasoning>
-Step 2:<step 2 reasoning>
-Step 3:<step 3 reasoning>
-Step 4:<step 4 reasoning>
+Step 1: <step 1 reasoning>
+Step 2: <step 2 reasoning>
+Step 3: <step 3 reasoning>
+Step 4: <step 4 reasoning>
 Response to user:<response to customer>
+
 """
 
 
@@ -137,18 +140,21 @@ class LaunchRequestHandler(AbstractRequestHandler):
         )
 
 
-class AskChatGPTIntentHandler(AbstractRequestHandler):
+class WhatIntentHandler(AbstractRequestHandler):
     """Handler for Hello World Intent."""
 
     def can_handle(self, handler_input):
         # type: (HandlerInput) -> bool
-        return ask_utils.is_intent_name("AskChatGPTIntent")(handler_input)
+        return ask_utils.is_intent_name("WhatIntent")(handler_input)
 
     def handle(self, handler_input):
         # type: (HandlerInput) -> Response
         # speak_output = "Activated Chat G P T Intent"
 
-        new_question = handler_input.request_envelope.request.intent.slots["question"].value
+        intent_name = ask_utils.get_intent_name(handler_input)
+        separated_intent_name = intent_name.split("Intent")[0]
+        new_question = separated_intent_name + " " + \
+            handler_input.request_envelope.request.intent.slots["question"].value
 
         messages = [
             {"role": "system",
@@ -177,9 +183,10 @@ class AskChatGPTIntentHandler(AbstractRequestHandler):
             time.sleep(3)
 
         response = completion.choices[0].message.content
+        final_response = response.split(":")[-1]
 
         CHAT_HISTORY.append(
-            (new_question, completion.choices[0].message.content))
+            (new_question, final_response))
 
         worksheet = sh.get_worksheet(0)
         chat_history_filtered = list(
@@ -188,11 +195,407 @@ class AskChatGPTIntentHandler(AbstractRequestHandler):
         # this function writes to a cell in the spreadsheet
         worksheet.update("A" + new_index, new_question)
         worksheet.update(
-            "B" + new_index, completion.choices[0].message.content)
+            "B" + new_index, final_response)
 
         return (
             handler_input.response_builder
-            .speak(response)
+            .speak(final_response)
+            .ask('Is there anything else i can help you?')
+            # .ask("add a reprompt if you want to keep the session open for the user to respond")
+            .response
+        )
+
+
+class HowIntentHandler(AbstractRequestHandler):
+    """Handler for Hello World Intent."""
+
+    def can_handle(self, handler_input):
+        # type: (HandlerInput) -> bool
+        return ask_utils.is_intent_name("HowIntent")(handler_input)
+
+    def handle(self, handler_input):
+        # type: (HandlerInput) -> Response
+        # speak_output = "Activated Chat G P T Intent"
+
+        intent_name = ask_utils.get_intent_name(handler_input)
+        separated_intent_name = intent_name.split("Intent")[0]
+        new_question = separated_intent_name + " " + \
+            handler_input.request_envelope.request.intent.slots["question"].value
+
+        messages = [
+            {"role": "system",
+             "content": INSTRUCTIONS},
+        ]
+
+        for question, answer in CHAT_HISTORY[-MAX_CONTEXT_QUESTIONS:]:
+            messages.append({"role": "user", "content": question})
+            messages.append({"role": "assistant", "content": answer})
+
+        messages.append({"role": "user", "content": new_question})
+
+        completion = ''
+
+        completion = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=messages,
+            temperature=TEMPERATURE,
+            max_tokens=MAX_TOKENS,
+            top_p=1,
+            frequency_penalty=FREQUENCY_PENALTY,
+            presence_penalty=PRESENCE_PENALTY,
+        )
+
+        while completion == '':
+            time.sleep(3)
+
+        response = completion.choices[0].message.content
+        final_response = response.split(":")[-1]
+
+        CHAT_HISTORY.append(
+            (new_question, final_response))
+
+        worksheet = sh.get_worksheet(0)
+        chat_history_filtered = list(
+            filter(lambda x: not None, worksheet.col_values(1)))
+        new_index = str(len(chat_history_filtered) + 1)
+        # this function writes to a cell in the spreadsheet
+        worksheet.update("A" + new_index, new_question)
+        worksheet.update(
+            "B" + new_index, final_response)
+
+        return (
+            handler_input.response_builder
+            .speak(final_response)
+            .ask('Is there anything else i can help you?')
+            # .ask("add a reprompt if you want to keep the session open for the user to respond")
+            .response
+        )
+    
+
+class WhenIntentHandler(AbstractRequestHandler):
+    """Handler for Hello World Intent."""
+
+    def can_handle(self, handler_input):
+        # type: (HandlerInput) -> bool
+        return ask_utils.is_intent_name("WhenIntent")(handler_input)
+
+    def handle(self, handler_input):
+        # type: (HandlerInput) -> Response
+        # speak_output = "Activated Chat G P T Intent"
+
+        intent_name = ask_utils.get_intent_name(handler_input)
+        separated_intent_name = intent_name.split("Intent")[0]
+        new_question = separated_intent_name + " " + \
+            handler_input.request_envelope.request.intent.slots["question"].value
+
+        messages = [
+            {"role": "system",
+             "content": INSTRUCTIONS},
+        ]
+
+        for question, answer in CHAT_HISTORY[-MAX_CONTEXT_QUESTIONS:]:
+            messages.append({"role": "user", "content": question})
+            messages.append({"role": "assistant", "content": answer})
+
+        messages.append({"role": "user", "content": new_question})
+
+        completion = ''
+
+        completion = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=messages,
+            temperature=TEMPERATURE,
+            max_tokens=MAX_TOKENS,
+            top_p=1,
+            frequency_penalty=FREQUENCY_PENALTY,
+            presence_penalty=PRESENCE_PENALTY,
+        )
+
+        while completion == '':
+            time.sleep(3)
+
+        response = completion.choices[0].message.content
+        final_response = response.split(":")[-1]
+
+        CHAT_HISTORY.append(
+            (new_question, final_response))
+
+        worksheet = sh.get_worksheet(0)
+        chat_history_filtered = list(
+            filter(lambda x: not None, worksheet.col_values(1)))
+        new_index = str(len(chat_history_filtered) + 1)
+        # this function writes to a cell in the spreadsheet
+        worksheet.update("A" + new_index, new_question)
+        worksheet.update(
+            "B" + new_index, final_response)
+
+        return (
+            handler_input.response_builder
+            .speak(final_response)
+            .ask('Is there anything else i can help you?')
+            # .ask("add a reprompt if you want to keep the session open for the user to respond")
+            .response
+        )
+
+
+class WhereIntentHandler(AbstractRequestHandler):
+    """Handler for Hello World Intent."""
+
+    def can_handle(self, handler_input):
+        # type: (HandlerInput) -> bool
+        return ask_utils.is_intent_name("WhereIntent")(handler_input)
+
+    def handle(self, handler_input):
+        # type: (HandlerInput) -> Response
+        # speak_output = "Activated Chat G P T Intent"
+
+        intent_name = ask_utils.get_intent_name(handler_input)
+        separated_intent_name = intent_name.split("Intent")[0]
+        new_question = separated_intent_name + " " + \
+            handler_input.request_envelope.request.intent.slots["question"].value
+
+        messages = [
+            {"role": "system",
+             "content": INSTRUCTIONS},
+        ]
+
+        for question, answer in CHAT_HISTORY[-MAX_CONTEXT_QUESTIONS:]:
+            messages.append({"role": "user", "content": question})
+            messages.append({"role": "assistant", "content": answer})
+
+        messages.append({"role": "user", "content": new_question})
+
+        completion = ''
+
+        completion = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=messages,
+            temperature=TEMPERATURE,
+            max_tokens=MAX_TOKENS,
+            top_p=1,
+            frequency_penalty=FREQUENCY_PENALTY,
+            presence_penalty=PRESENCE_PENALTY,
+        )
+
+        while completion == '':
+            time.sleep(3)
+
+        response = completion.choices[0].message.content
+        final_response = response.split(":")[-1]
+
+        CHAT_HISTORY.append(
+            (new_question, final_response))
+
+        worksheet = sh.get_worksheet(0)
+        chat_history_filtered = list(
+            filter(lambda x: not None, worksheet.col_values(1)))
+        new_index = str(len(chat_history_filtered) + 1)
+        # this function writes to a cell in the spreadsheet
+        worksheet.update("A" + new_index, new_question)
+        worksheet.update(
+            "B" + new_index, final_response)
+
+        return (
+            handler_input.response_builder
+            .speak(final_response)
+            .ask('Is there anything else i can help you?')
+            # .ask("add a reprompt if you want to keep the session open for the user to respond")
+            .response
+        )
+
+
+class WhichIntentHandler(AbstractRequestHandler):
+    """Handler for Hello World Intent."""
+
+    def can_handle(self, handler_input):
+        # type: (HandlerInput) -> bool
+        return ask_utils.is_intent_name("WhichIntent")(handler_input)
+
+    def handle(self, handler_input):
+        # type: (HandlerInput) -> Response
+        # speak_output = "Activated Chat G P T Intent"
+
+        intent_name = ask_utils.get_intent_name(handler_input)
+        separated_intent_name = intent_name.split("Intent")[0]
+        new_question = separated_intent_name + " " + \
+            handler_input.request_envelope.request.intent.slots["question"].value
+
+        messages = [
+            {"role": "system",
+             "content": INSTRUCTIONS},
+        ]
+
+        for question, answer in CHAT_HISTORY[-MAX_CONTEXT_QUESTIONS:]:
+            messages.append({"role": "user", "content": question})
+            messages.append({"role": "assistant", "content": answer})
+
+        messages.append({"role": "user", "content": new_question})
+
+        completion = ''
+
+        completion = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=messages,
+            temperature=TEMPERATURE,
+            max_tokens=MAX_TOKENS,
+            top_p=1,
+            frequency_penalty=FREQUENCY_PENALTY,
+            presence_penalty=PRESENCE_PENALTY,
+        )
+
+        while completion == '':
+            time.sleep(3)
+
+        response = completion.choices[0].message.content
+        final_response = response.split(":")[-1]
+
+        CHAT_HISTORY.append(
+            (new_question, final_response))
+
+        worksheet = sh.get_worksheet(0)
+        chat_history_filtered = list(
+            filter(lambda x: not None, worksheet.col_values(1)))
+        new_index = str(len(chat_history_filtered) + 1)
+        # this function writes to a cell in the spreadsheet
+        worksheet.update("A" + new_index, new_question)
+        worksheet.update(
+            "B" + new_index, final_response)
+
+        return (
+            handler_input.response_builder
+            .speak(final_response)
+            .ask('Is there anything else i can help you?')
+            # .ask("add a reprompt if you want to keep the session open for the user to respond")
+            .response
+        )
+
+
+class WhoIntentHandler(AbstractRequestHandler):
+    """Handler for Hello World Intent."""
+
+    def can_handle(self, handler_input):
+        # type: (HandlerInput) -> bool
+        return ask_utils.is_intent_name("WhoIntent")(handler_input)
+
+    def handle(self, handler_input):
+        # type: (HandlerInput) -> Response
+        # speak_output = "Activated Chat G P T Intent"
+
+        intent_name = ask_utils.get_intent_name(handler_input)
+        separated_intent_name = intent_name.split("Intent")[0]
+        new_question = separated_intent_name + " " + \
+            handler_input.request_envelope.request.intent.slots["question"].value
+
+        messages = [
+            {"role": "system",
+             "content": INSTRUCTIONS},
+        ]
+
+        for question, answer in CHAT_HISTORY[-MAX_CONTEXT_QUESTIONS:]:
+            messages.append({"role": "user", "content": question})
+            messages.append({"role": "assistant", "content": answer})
+
+        messages.append({"role": "user", "content": new_question})
+
+        completion = ''
+
+        completion = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=messages,
+            temperature=TEMPERATURE,
+            max_tokens=MAX_TOKENS,
+            top_p=1,
+            frequency_penalty=FREQUENCY_PENALTY,
+            presence_penalty=PRESENCE_PENALTY,
+        )
+
+        while completion == '':
+            time.sleep(3)
+
+        response = completion.choices[0].message.content
+        final_response = response.split(":")[-1]
+
+        CHAT_HISTORY.append(
+            (new_question, final_response))
+
+        worksheet = sh.get_worksheet(0)
+        chat_history_filtered = list(
+            filter(lambda x: not None, worksheet.col_values(1)))
+        new_index = str(len(chat_history_filtered) + 1)
+        # this function writes to a cell in the spreadsheet
+        worksheet.update("A" + new_index, new_question)
+        worksheet.update(
+            "B" + new_index, final_response)
+
+        return (
+            handler_input.response_builder
+            .speak(final_response)
+            .ask('Is there anything else i can help you?')
+            # .ask("add a reprompt if you want to keep the session open for the user to respond")
+            .response
+        )
+
+
+class IfIntentHandler(AbstractRequestHandler):
+    """Handler for Hello World Intent."""
+
+    def can_handle(self, handler_input):
+        # type: (HandlerInput) -> bool
+        return ask_utils.is_intent_name("IfIntent")(handler_input)
+
+    def handle(self, handler_input):
+        # type: (HandlerInput) -> Response
+        # speak_output = "Activated Chat G P T Intent"
+
+        intent_name = ask_utils.get_intent_name(handler_input)
+        separated_intent_name = intent_name.split("Intent")[0]
+        new_question = separated_intent_name + " " + \
+            handler_input.request_envelope.request.intent.slots["question"].value
+
+        messages = [
+            {"role": "system",
+             "content": INSTRUCTIONS},
+        ]
+
+        for question, answer in CHAT_HISTORY[-MAX_CONTEXT_QUESTIONS:]:
+            messages.append({"role": "user", "content": question})
+            messages.append({"role": "assistant", "content": answer})
+
+        messages.append({"role": "user", "content": new_question})
+
+        completion = ''
+
+        completion = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=messages,
+            temperature=TEMPERATURE,
+            max_tokens=MAX_TOKENS,
+            top_p=1,
+            frequency_penalty=FREQUENCY_PENALTY,
+            presence_penalty=PRESENCE_PENALTY,
+        )
+
+        while completion == '':
+            time.sleep(3)
+
+        response = completion.choices[0].message.content
+        final_response = response.split(":")[-1]
+
+        CHAT_HISTORY.append(
+            (new_question, final_response))
+
+        worksheet = sh.get_worksheet(0)
+        chat_history_filtered = list(
+            filter(lambda x: not None, worksheet.col_values(1)))
+        new_index = str(len(chat_history_filtered) + 1)
+        # this function writes to a cell in the spreadsheet
+        worksheet.update("A" + new_index, new_question)
+        worksheet.update(
+            "B" + new_index, final_response)
+
+        return (
+            handler_input.response_builder
+            .speak(final_response)
             .ask('Is there anything else i can help you?')
             # .ask("add a reprompt if you want to keep the session open for the user to respond")
             .response
@@ -323,7 +726,13 @@ class CatchAllExceptionHandler(AbstractExceptionHandler):
 sb = SkillBuilder()
 
 sb.add_request_handler(LaunchRequestHandler())
-sb.add_request_handler(AskChatGPTIntentHandler())
+sb.add_request_handler(WhatIntentHandler())
+sb.add_request_handler(HowIntentHandler())
+sb.add_request_handler(WhenIntentHandler())
+sb.add_request_handler(WhereIntentHandler())
+sb.add_request_handler(WhichIntentHandler())
+sb.add_request_handler(WhoIntentHandler())
+sb.add_request_handler(IfIntentHandler())
 sb.add_request_handler(HelpIntentHandler())
 sb.add_request_handler(CancelOrStopIntentHandler())
 sb.add_request_handler(FallbackIntentHandler())
