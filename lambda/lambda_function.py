@@ -196,6 +196,10 @@ class WhatIntentHandler(AbstractRequestHandler):
         worksheet.update("A" + new_index, new_question)
         worksheet.update(
             "B" + new_index, final_response)
+        
+        # not for GPT but just to see the reasoning
+        worksheet.update(
+            "D" + new_index, response)
 
         return (
             handler_input.response_builder
@@ -263,6 +267,10 @@ class HowIntentHandler(AbstractRequestHandler):
         worksheet.update(
             "B" + new_index, final_response)
 
+        # not for GPT but just to see the reasoning
+        worksheet.update(
+            "D" + new_index, response)
+            
         return (
             handler_input.response_builder
             .speak(final_response)
@@ -328,6 +336,10 @@ class WhenIntentHandler(AbstractRequestHandler):
         worksheet.update("A" + new_index, new_question)
         worksheet.update(
             "B" + new_index, final_response)
+            
+        # not for GPT but just to see the reasoning
+        worksheet.update(
+            "D" + new_index, response)
 
         return (
             handler_input.response_builder
@@ -395,6 +407,10 @@ class WhereIntentHandler(AbstractRequestHandler):
         worksheet.update(
             "B" + new_index, final_response)
 
+        # not for GPT but just to see the reasoning
+        worksheet.update(
+            "D" + new_index, response)
+            
         return (
             handler_input.response_builder
             .speak(final_response)
@@ -461,6 +477,10 @@ class WhichIntentHandler(AbstractRequestHandler):
         worksheet.update(
             "B" + new_index, final_response)
 
+        # not for GPT but just to see the reasoning
+        worksheet.update(
+            "D" + new_index, response)
+            
         return (
             handler_input.response_builder
             .speak(final_response)
@@ -527,6 +547,10 @@ class WhoIntentHandler(AbstractRequestHandler):
         worksheet.update(
             "B" + new_index, final_response)
 
+        # not for GPT but just to see the reasoning
+        worksheet.update(
+            "D" + new_index, response)
+            
         return (
             handler_input.response_builder
             .speak(final_response)
@@ -593,6 +617,10 @@ class IfIntentHandler(AbstractRequestHandler):
         worksheet.update(
             "B" + new_index, final_response)
 
+        # not for GPT but just to see the reasoning
+        worksheet.update(
+            "D" + new_index, response)
+            
         return (
             handler_input.response_builder
             .speak(final_response)
