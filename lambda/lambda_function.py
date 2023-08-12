@@ -28,14 +28,14 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 
 RECIPE = """
 1. INGREDIENTS FOR CHICKEN AVOCADO MANGO SALAD
-- 1 lb or 2 medium cooked chicken breasts 
-- 6 cups or 1 head romaine lettuce, rinsed, chopped and spun dry
-- 1/2 cup halved cherry tomatoes 
-- 1/2 sliced english cucumber 
-- 1 mango, pitted, peeled and diced
-- 1 avocado, pitted, peeled and diced
-- 1/2 thinly sliced small purple onion
-- 1/4 cup chopped cilantro chopped
+- 1/2 lb or 1 medium cooked chicken breasts 
+- 3 cups or 1/2 head romaine lettuce, rinsed, chopped and spun dry
+- 1/4 cup halved cherry tomatoes 
+- 1/4 sliced english cucumber 
+- 1/2 mango, pitted, peeled and diced
+- 1/2 avocado, pitted, peeled and diced
+- 1/4 thinly sliced small purple onion
+- 1/8 cup chopped cilantro chopped
 
 STEPS
 - Step 1: Chop the romaine into bite-sized pieces and discard the core. \
@@ -49,13 +49,13 @@ After rinse and spin dry, place it in a large salad bowl.
 - Step 8: Add chopped fresh cilantro.
 
 INGREDIENTS FOR HONEY VINAIGRETTE DRESSING
-- 1/2 cup extra virgin olive oil
-- 3 Tbsp apple cider vinegar
-- 2 tsp dijon mustard
-- 2 tsp honey
-- 1 garlic clove or 1 tsp minced garlic
-- 1 tsp sea salt
-- 1/4 tsp black pepper, or to taste
+- 1/4 cup extra virgin olive oil
+- 1 1/2 Tbsp apple cider vinegar
+- 1 tsp dijon mustard
+- 1 tsp honey
+- 1/2 garlic clove or 1 tsp minced garlic
+- 1/2 tsp sea salt
+- 1/8 tsp black pepper, or to taste
 
 - Step 9: Combine the Honey Vinaigrette Dressing Ingredients in a mason jar, \
 first add olive oil.
@@ -114,16 +114,15 @@ sh = gc.open_by_url(sheet_url)
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
-
 def myhandler(handler_input):
     # type: (HandlerInput) -> Response
     # speak_output = "Activated Chat G P T Intent"
 
-    # Starting tasks----------------
+    #Starting tasks----------------
     worksheet = sh.get_worksheet(0)
     user_questions = worksheet.col_values(1)
     va_responses = worksheet.col_values(2)
-
+    
     if len(user_questions) < 1:
         # this function writes to a cell in the spreadsheet
         worksheet.update("A1", "User Questions")
@@ -132,24 +131,10 @@ def myhandler(handler_input):
             CHAT_HISTORY.append((user_questions[i], va_responses[i]))
 
     intent_name = ask_utils.get_intent_name(handler_input)
-    separated_intent_name = intent_name.split("Intent")[0]
-
-    if separated_intent_name == "Can":
-        separated_intent_name = separated_intent_name + " you"
-    elif separated_intent_name == "How":
-        separated_intent_name = separated_intent_name + " to"
-    elif separated_intent_name == "What":
-        separated_intent_name = separated_intent_name + " is"
-    elif separated_intent_name == "Where":
-        separated_intent_name = separated_intent_name + " should"
-    elif separated_intent_name == "When":
-        separated_intent_name = separated_intent_name + " to"
-    elif separated_intent_name == "Whether" or separated_intent_name == "On" or separated_intent_name == "The":
-        separated_intent_name = separated_intent_name + " the"
-
-    new_question = separated_intent_name + " " + \
-        handler_input.request_envelope.request.intent.slots["question"].value
-
+    # separated_intent_name = intent_name.split("Intent")[0]
+        
+    new_question = handler_input.request_envelope.request.intent.slots["question"].value
+        
     messages = [
         {"role": "system",
          "content": INSTRUCTIONS},
@@ -176,7 +161,7 @@ def myhandler(handler_input):
     while completion == '':
         time.sleep(3)
 
-    # get the response and remove the logic (Step X : ...)
+    # get the response
     response = completion.choices[0].message.content
     final_response = response.split(":")[-1]
 
@@ -199,7 +184,6 @@ def myhandler(handler_input):
         .response
     )
 
-
 class LaunchRequestHandler(AbstractRequestHandler):
     """Handler for Skill Launch."""
 
@@ -220,144 +204,12 @@ class LaunchRequestHandler(AbstractRequestHandler):
         )
 
 
-class WhatIntentHandler(AbstractRequestHandler):
-    """Handler for What Intent."""
-
-    def can_handle(self, handler_input):
-        # type: (HandlerInput) -> bool
-        return ask_utils.is_intent_name("WhatIntent")(handler_input)
-
-    def handle(self, handler_input):
-        return myhandler(handler_input)
-
-
-class HowIntentHandler(AbstractRequestHandler):
+class BuddyIntentHandler(AbstractRequestHandler):
     """Handler for How Intent."""
 
     def can_handle(self, handler_input):
         # type: (HandlerInput) -> bool
-        return ask_utils.is_intent_name("HowIntent")(handler_input)
-
-    def handle(self, handler_input):
-        return myhandler(handler_input)
-
-
-class WhenIntentHandler(AbstractRequestHandler):
-    """Handler for When Intent."""
-
-    def can_handle(self, handler_input):
-        # type: (HandlerInput) -> bool
-        return ask_utils.is_intent_name("WhenIntent")(handler_input)
-
-    def handle(self, handler_input):
-        return myhandler(handler_input)
-
-
-class WhereIntentHandler(AbstractRequestHandler):
-    """Handler for Where Intent."""
-
-    def can_handle(self, handler_input):
-        # type: (HandlerInput) -> bool
-        return ask_utils.is_intent_name("WhereIntent")(handler_input)
-
-    def handle(self, handler_input):
-        return myhandler(handler_input)
-
-
-class WhichIntentHandler(AbstractRequestHandler):
-    """Handler for Which Intent."""
-
-    def can_handle(self, handler_input):
-        # type: (HandlerInput) -> bool
-        return ask_utils.is_intent_name("WhichIntent")(handler_input)
-
-    def handle(self, handler_input):
-        return myhandler(handler_input)
-
-
-class WhoIntentHandler(AbstractRequestHandler):
-    """Handler for Who Intent."""
-
-    def can_handle(self, handler_input):
-        # type: (HandlerInput) -> bool
-        return ask_utils.is_intent_name("WhoIntent")(handler_input)
-
-    def handle(self, handler_input):
-        return myhandler(handler_input)
-
-
-class IfIntentHandler(AbstractRequestHandler):
-    """Handler for If Intent."""
-
-    def can_handle(self, handler_input):
-        # type: (HandlerInput) -> bool
-        return ask_utils.is_intent_name("IfIntent")(handler_input)
-
-    def handle(self, handler_input):
-        return myhandler(handler_input)
-
-
-class WhetherIntentHandler(AbstractRequestHandler):
-    """Handler for Whether Intent."""
-
-    def can_handle(self, handler_input):
-        # type: (HandlerInput) -> bool
-        return ask_utils.is_intent_name("WhetherIntent")(handler_input)
-
-    def handle(self, handler_input):
-        return myhandler(handler_input)
-
-
-class DoIntentHandler(AbstractRequestHandler):
-    """Handler for Do Intent."""
-
-    def can_handle(self, handler_input):
-        # type: (HandlerInput) -> bool
-        return ask_utils.is_intent_name("DoIntent")(handler_input)
-
-    def handle(self, handler_input):
-        return myhandler(handler_input)
-
-
-class CanIntentHandler(AbstractRequestHandler):
-    """Handler for Can Intent."""
-
-    def can_handle(self, handler_input):
-        # type: (HandlerInput) -> bool
-        return ask_utils.is_intent_name("CanIntent")(handler_input)
-
-    def handle(self, handler_input):
-        return myhandler(handler_input)
-
-
-class ToIntentHandler(AbstractRequestHandler):
-    """Handler for To Intent."""
-
-    def can_handle(self, handler_input):
-        # type: (HandlerInput) -> bool
-        return ask_utils.is_intent_name("ToIntent")(handler_input)
-
-    def handle(self, handler_input):
-        return myhandler(handler_input)
-
-
-class TheIntentHandler(AbstractRequestHandler):
-    """Handler for To Intent."""
-
-    def can_handle(self, handler_input):
-        # type: (HandlerInput) -> bool
-        return ask_utils.is_intent_name("TheIntent")(handler_input)
-
-    def handle(self, handler_input):
-        return myhandler(handler_input)
-
-
-class OnIntentHandler(AbstractRequestHandler):
-    """Handler for To Intent."""
-
-    def can_handle(self, handler_input):
-        # type: (HandlerInput) -> bool
-        return ask_utils.is_intent_name("OnIntent")(handler_input)
+        return ask_utils.is_intent_name("BuddyIntent")(handler_input)
 
     def handle(self, handler_input):
         return myhandler(handler_input)
@@ -488,19 +340,7 @@ sb = SkillBuilder()
 
 sb.add_request_handler(LaunchRequestHandler())
 # customized
-sb.add_request_handler(WhatIntentHandler())
-sb.add_request_handler(HowIntentHandler())
-sb.add_request_handler(WhenIntentHandler())
-sb.add_request_handler(WhereIntentHandler())
-sb.add_request_handler(WhichIntentHandler())
-sb.add_request_handler(WhoIntentHandler())
-sb.add_request_handler(IfIntentHandler())
-sb.add_request_handler(WhetherIntentHandler())
-sb.add_request_handler(DoIntentHandler())
-sb.add_request_handler(CanIntentHandler())
-sb.add_request_handler(ToIntentHandler())
-sb.add_request_handler(TheIntentHandler())
-sb.add_request_handler(OnIntentHandler())
+sb.add_request_handler(BuddyIntentHandler())
 # default
 sb.add_request_handler(HelpIntentHandler())
 sb.add_request_handler(CancelOrStopIntentHandler())
