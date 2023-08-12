@@ -28,13 +28,13 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 
 RECIPE = """
 1. INGREDIENTS FOR CHICKEN AVOCADO MANGO SALAD
-- 1/4 lb or 1/2 medium cooked chicken breasts 
 - 1 1/2 cups or 1/4 head romaine lettuce, rinsed, chopped and spun dry
-- 1/8 cup halved cherry tomatoes 
-- 1/8 english cucumber sliced 
+- 1/4 lb or 1/2 medium cooked chicken breasts 
 - 1/4 mango, pitted, peeled and diced
 - 1/4 avocado, pitted, peeled and diced
+- 1/8 english cucumber sliced 
 - 1/8 thinly sliced small purple onion
+- 1/8 cup halved cherry tomatoes 
 - 1/16 cup chopped cilantro chopped
 
 STEPS
@@ -114,15 +114,16 @@ sh = gc.open_by_url(sheet_url)
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
+
 def myhandler(handler_input):
     # type: (HandlerInput) -> Response
     # speak_output = "Activated Chat G P T Intent"
 
-    #Starting tasks----------------
+    # Starting tasks----------------
     worksheet = sh.get_worksheet(0)
     user_questions = worksheet.col_values(1)
     va_responses = worksheet.col_values(2)
-    
+
     if len(user_questions) < 1:
         # this function writes to a cell in the spreadsheet
         worksheet.update("A1", "User Questions")
@@ -131,10 +132,9 @@ def myhandler(handler_input):
             CHAT_HISTORY.append((user_questions[i], va_responses[i]))
 
     intent_name = ask_utils.get_intent_name(handler_input)
-    # separated_intent_name = intent_name.split("Intent")[0]
-        
+
     new_question = handler_input.request_envelope.request.intent.slots["question"].value
-        
+
     messages = [
         {"role": "system",
          "content": INSTRUCTIONS},
@@ -144,6 +144,7 @@ def myhandler(handler_input):
         messages.append({"role": "user", "content": question})
         messages.append({"role": "assistant", "content": answer})
 
+    messages.append({"role": "system", "content": INSTRUCTIONS})
     messages.append({"role": "user", "content": new_question})
 
     completion = ''
@@ -163,10 +164,9 @@ def myhandler(handler_input):
 
     # get the response
     response = completion.choices[0].message.content
-    final_response = response.split(":")[-1]
 
     CHAT_HISTORY.append(
-        (new_question, final_response))
+        (new_question, response))
 
     worksheet = sh.get_worksheet(0)
     chat_history_filtered = list(
@@ -174,15 +174,16 @@ def myhandler(handler_input):
     new_index = str(len(chat_history_filtered) + 1)
     # this function writes to a cell in the spreadsheet
     worksheet.update("A" + new_index, new_question)
-    worksheet.update("B" + new_index, final_response)
+    worksheet.update("B" + new_index, response)
     worksheet.update("C" + new_index, intent_name)
 
     return (
         handler_input.response_builder
-        .speak(final_response)
+        .speak(response)
         .set_should_end_session(True)
         .response
     )
+
 
 class LaunchRequestHandler(AbstractRequestHandler):
     """Handler for Skill Launch."""
