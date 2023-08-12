@@ -28,14 +28,14 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 
 RECIPE = """
 1. INGREDIENTS FOR CHICKEN AVOCADO MANGO SALAD
-- 1/2 lb or 1 medium cooked chicken breasts 
-- 3 cups or 1/2 head romaine lettuce, rinsed, chopped and spun dry
-- 1/4 cup halved cherry tomatoes 
-- 1/4 sliced english cucumber 
-- 1/2 mango, pitted, peeled and diced
-- 1/2 avocado, pitted, peeled and diced
-- 1/4 thinly sliced small purple onion
-- 1/8 cup chopped cilantro chopped
+- 1/4 lb or 1/2 medium cooked chicken breasts 
+- 1 1/2 cups or 1/4 head romaine lettuce, rinsed, chopped and spun dry
+- 1/8 cup halved cherry tomatoes 
+- 1/8 english cucumber sliced 
+- 1/4 mango, pitted, peeled and diced
+- 1/4 avocado, pitted, peeled and diced
+- 1/8 thinly sliced small purple onion
+- 1/16 cup chopped cilantro chopped
 
 STEPS
 - Step 1: Chop the romaine into bite-sized pieces and discard the core. \
@@ -49,13 +49,13 @@ After rinse and spin dry, place it in a large salad bowl.
 - Step 8: Add chopped fresh cilantro.
 
 INGREDIENTS FOR HONEY VINAIGRETTE DRESSING
-- 1/4 cup extra virgin olive oil
-- 1 1/2 Tbsp apple cider vinegar
-- 1 tsp dijon mustard
-- 1 tsp honey
-- 1/2 garlic clove or 1 tsp minced garlic
-- 1/2 tsp sea salt
-- 1/8 tsp black pepper, or to taste
+- 1/8 cup extra virgin olive oil
+- 3/4 Tbsp apple cider vinegar
+- 1/2 tsp dijon mustard
+- 1/2 tsp honey
+- 1/4 garlic clove or 1/4 tsp minced garlic
+- 1/4 tsp sea salt
+- 1/16 tsp black pepper, or to taste
 
 - Step 9: Combine the Honey Vinaigrette Dressing Ingredients in a mason jar, \
 first add olive oil.
