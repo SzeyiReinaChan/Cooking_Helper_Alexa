@@ -1,0 +1,866 @@
+{
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "mango mango",
+            "intents": [
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": [
+                        "quit it",
+                        "quit",
+                        "nada",
+                        "bye",
+                        "that is all",
+                        "that's all",
+                        "good bye",
+                        "cancel",
+                        "stop",
+                        "not now",
+                        "no",
+                        "maybe not"
+                    ]
+                },
+                {
+                    "name": "AMAZON.NavigateHomeIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.FallbackIntent",
+                    "samples": []
+                },
+                {
+                    "name": "WhatIntent",
+                    "slots": [
+                        {
+                            "name": "question",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "what's {question}",
+                        "what {question}"
+                    ]
+                },
+                {
+                    "name": "HowIntent",
+                    "slots": [
+                        {
+                            "name": "question",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "How do {question}",
+                        "How to {question}",
+                        "How's {question}",
+                        "How {question}"
+                    ]
+                },
+                {
+                    "name": "WhenIntent",
+                    "slots": [
+                        {
+                            "name": "question",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "When do {question}",
+                        "When should {question}",
+                        "When's {question}",
+                        "When {question}"
+                    ]
+                },
+                {
+                    "name": "WhereIntent",
+                    "slots": [
+                        {
+                            "name": "question",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "Where do {question}",
+                        "Where are {question}",
+                        "Where is {question}",
+                        "Where's {question}",
+                        "Where {question} "
+                    ]
+                },
+                {
+                    "name": "WhichIntent",
+                    "slots": [
+                        {
+                            "name": "question",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "Which one {question}",
+                        "Which {question}"
+                    ]
+                },
+                {
+                    "name": "WhoIntent",
+                    "slots": [
+                        {
+                            "name": "question",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "Who's {question}",
+                        "Who {question}",
+                        "Whose {question}"
+                    ]
+                },
+                {
+                    "name": "IfIntent",
+                    "slots": [
+                        {
+                            "name": "question",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "If {question}",
+                        "ask cook bot if {question}"
+                    ]
+                },
+                {
+                    "name": "WhetherIntent",
+                    "slots": [
+                        {
+                            "name": "question",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "Whether this {question}",
+                        "Whether if {question}",
+                        "Whether the {question}",
+                        "Whether {question}"
+                    ]
+                },
+                {
+                    "name": "DoIntent",
+                    "slots": [
+                        {
+                            "name": "question",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "Did it {question}",
+                        "Does it {question}",
+                        "Do it {question}",
+                        "Did the {question}",
+                        "Does the {question}",
+                        "Do the {question}",
+                        "Did {question}",
+                        "Does {question}",
+                        "Do {question}"
+                    ]
+                },
+                {
+                    "name": "CanIntent",
+                    "slots": [
+                        {
+                            "name": "question",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "Can you {question}",
+                        "Can {question}",
+                        "Might {question}",
+                        "May {question}",
+                        "should {question}",
+                        "shall {question}",
+                        "would {question}",
+                        "will {question}",
+                        "Could {question}"
+                    ]
+                },
+                {
+                    "name": "ToIntent",
+                    "slots": [
+                        {
+                            "name": "queston",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "to provide {queston}",
+                        "to help {queston}",
+                        "to let {queston}",
+                        "ask cook bot to {queston}",
+                        "to {queston}"
+                    ]
+                },
+                {
+                    "name": "TheIntent",
+                    "slots": [
+                        {
+                            "name": "question",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "the {question}"
+                    ]
+                },
+                {
+                    "name": "OnIntent",
+                    "slots": [
+                        {
+                            "name": "question",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "on the {question}",
+                        "on {question}"
+                    ]
+                },
+                {
+                    "name": "IIntent",
+                    "slots": [
+                        {
+                            "name": "question",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "I'm {question}",
+                        "I am {question}",
+                        "I {question}",
+                        "Im {question}"
+                    ]
+                },
+                {
+                    "name": "MyIntent",
+                    "slots": [
+                        {
+                            "name": "question",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "My {question}"
+                    ]
+                },
+                {
+                    "name": "HaveIntent",
+                    "slots": [
+                        {
+                            "name": "question",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "Had {question}",
+                        "Has {question}",
+                        "Have {question}"
+                    ]
+                },
+                {
+                    "name": "AreIntent",
+                    "slots": [
+                        {
+                            "name": "question",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "Were {question}",
+                        "Am {question}",
+                        "Are {question}",
+                        "Was {question}",
+                        "Is {question}"
+                    ]
+                },
+                {
+                    "name": "TellIntent",
+                    "slots": [
+                        {
+                            "name": "question",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "select {question}",
+                        "decide {question}",
+                        "choose {question}",
+                        "pick {question}",
+                        "point out {question}",
+                        "hint {question}",
+                        "advise {question}",
+                        "present {question}",
+                        "put {question}",
+                        "offer {question}",
+                        "propose {question}",
+                        "recommend {question}",
+                        "suggest {question}",
+                        "scan {question}",
+                        "give {question}",
+                        "get {question}",
+                        "look {question}",
+                        "look up {question}",
+                        "Search {question}",
+                        "Find {question}",
+                        "Show {question}",
+                        "Tell {question}"
+                    ]
+                },
+                {
+                    "name": "AMAZON.ResumeIntent",
+                    "samples": [
+                        "don't leave",
+                        "don't go",
+                        "stay",
+                        "holdup",
+                        "hold on",
+                        "hold",
+                        "wait"
+                    ]
+                },
+                {
+                    "name": "AskChatGPTIntent",
+                    "slots": [
+                        {
+                            "name": "question",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "Guide {question}",
+                        "Beyond {question}",
+                        "Affirmative {question}",
+                        "Enough {question}",
+                        "Undoubtedly {question}",
+                        "Without a doubt {question}",
+                        "Of course {question}",
+                        "absolutely {question}",
+                        "indeed {question}",
+                        "Thus {question}",
+                        "Got that {question}",
+                        "Got {question}",
+                        "Understanding {question}",
+                        "Understand {question}",
+                        "Fact {question}",
+                        "Base {question}",
+                        "Basing {question}",
+                        "Based {question}",
+                        "Due {question}",
+                        "Account {question}",
+                        "Accounting {question}",
+                        "Assume {question}",
+                        "Assuming {question}",
+                        "Granted  {question}",
+                        "taking {question}",
+                        "take {question}",
+                        "feeling {question}",
+                        "thinking {question}",
+                        "think {question}",
+                        "Reflect {question}",
+                        "Reflecting {question}",
+                        "keeping {question}",
+                        "regarding {question}",
+                        "regard {question}",
+                        "question {question}",
+                        "consider {question}",
+                        "given {question}",
+                        "Considering {question}",
+                        "eventually {question}",
+                        "up {question}",
+                        "down {question}",
+                        "later {question}",
+                        "sooner {question}",
+                        "eventualy {question}",
+                        "it'd {question}",
+                        "it'll {question}",
+                        "of {question}",
+                        "nowaday {question}",
+                        "nowadays {question}",
+                        "lately {question}",
+                        "forever {question}",
+                        "deal {question}",
+                        "good {question}",
+                        "nice {question}",
+                        "somewhere {question}",
+                        "someday {question}",
+                        "recently {question}",
+                        "whatever {question}",
+                        "then {question}",
+                        "now {question}",
+                        "sometimes {question}",
+                        "sometime {question}",
+                        "feels {question}",
+                        "feels like {question}",
+                        "feel {question}",
+                        "sounds like {question}",
+                        "sounds {question}",
+                        "sound {question}",
+                        "they're {question}",
+                        "they'd {question}",
+                        "they'll {question}",
+                        "she'll {question}",
+                        "he'd {question}",
+                        "she'd {question}",
+                        "he's {question}",
+                        "we'll {question}",
+                        "i'll {question}",
+                        "she's {question}",
+                        "we'd {question}",
+                        "i'd {question}",
+                        "someone {question}",
+                        "Something {question}",
+                        "try {question}",
+                        "ni {question}",
+                        "nothing {question}",
+                        "it's {question}",
+                        "chat {question}",
+                        "let {question}",
+                        "let's {question}",
+                        "talk {question}",
+                        "graciously {question}",
+                        "kindly {question}",
+                        "continue {question}",
+                        "wait {question}",
+                        "hold {question}",
+                        "girl {question}",
+                        "boy {question}",
+                        "Dude {question}",
+                        "mean {question}",
+                        "another {question}",
+                        "serious {question}",
+                        "blah {question}",
+                        "right {question}",
+                        "um {question}",
+                        "alrighty {question}",
+                        "Alright {question}",
+                        "Like {question}",
+                        "seriously {question}",
+                        "frankly {question}",
+                        "honestly {question}",
+                        "actually {question}",
+                        "anyway {question}",
+                        "its {question}",
+                        "it {question}",
+                        "Her {question}",
+                        "His {question}",
+                        "Our {question}",
+                        "here {question}",
+                        "those {question}",
+                        "these {question}",
+                        "unless {question}",
+                        "if {question}",
+                        "yet {question}",
+                        "While {question}",
+                        "or {question}",
+                        "their {question}",
+                        "therefore {question}",
+                        "before {question}",
+                        "after {question}",
+                        "with {question}",
+                        "on {question}",
+                        "as {question}",
+                        "Because {question}",
+                        "me {question}",
+                        "they {question}",
+                        "z {question}",
+                        "y {question}",
+                        "x {question}",
+                        "w {question}",
+                        "v {question}",
+                        "u {question}",
+                        "s {question}",
+                        "r {question}",
+                        "q {question}",
+                        "p {question}",
+                        "o {question}",
+                        "n {question}",
+                        "m {question}",
+                        "l {question}",
+                        "j {question}",
+                        "t {question}",
+                        "h {question}",
+                        "g {question}",
+                        "f {question}",
+                        "e {question}",
+                        "d {question}",
+                        "c {question}",
+                        "b {question}",
+                        "she {question}",
+                        "he {question}",
+                        "nada {question}",
+                        "nope {question}",
+                        "ahan {question}",
+                        "to {question}",
+                        "God {question}",
+                        "hell {question}",
+                        "any {question}",
+                        "however {question}",
+                        "additionally {question}",
+                        "although {question}",
+                        "but {question}",
+                        "thanks {question}",
+                        "gee {question}",
+                        "yikes {question}",
+                        "oo {question}",
+                        "oops {question}",
+                        "uh {question}",
+                        "uh-oh {question}",
+                        "yep {question}",
+                        "yeah {question}",
+                        "ugh {question}",
+                        "oh {question}",
+                        "overall {question}",
+                        "at {question} ",
+                        "by {question}",
+                        "perfect {question}",
+                        "great {question}",
+                        "all {question}",
+                        "an {question}",
+                        "a {question}",
+                        "k {question}",
+                        "cool {question}",
+                        "Also {question}",
+                        "over {question}",
+                        "that's {question}",
+                        "upon {question}",
+                        "for {question}",
+                        "not {question}",
+                        "there {question}",
+                        "this {question} ",
+                        "that {question}",
+                        "in {question}",
+                        "na {question}",
+                        "ah {question}",
+                        "wow {question}",
+                        "no {question}",
+                        "Definitely {question}",
+                        "the {question}",
+                        "we're {question}",
+                        "since {question}",
+                        "hence {question}",
+                        "anyways {question}",
+                        "well {question}",
+                        "and {question}",
+                        "okay {question}",
+                        "ok {question}",
+                        "hey {question}",
+                        "hi {question}",
+                        "hello {question}",
+                        "We {question}",
+                        "Hmm {question}",
+                        "umm {question}",
+                        "aa {question}",
+                        "You {question}",
+                        "echo {question}",
+                        "chatbot {question}",
+                        "AI {question}",
+                        "ask {question}",
+                        "get  {question}",
+                        "and  {question}",
+                        "so {question}",
+                        "Alexa {question}"
+                    ]
+                },
+                {
+                    "name": "FirstIntent",
+                    "slots": [
+                        {
+                            "name": "question",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "First {question}"
+                    ]
+                },
+                {
+                    "name": "SecondIntent",
+                    "slots": [
+                        {
+                            "name": "question",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "Second {question}"
+                    ]
+                },
+                {
+                    "name": "ThirdIntent",
+                    "slots": [
+                        {
+                            "name": "question",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "Third {question}"
+                    ]
+                },
+                {
+                    "name": "FourthIntent",
+                    "slots": [
+                        {
+                            "name": "question",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "Fourth {question}"
+                    ]
+                },
+                {
+                    "name": "FifthIntent",
+                    "slots": [
+                        {
+                            "name": "question",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "Fifth {question}"
+                    ]
+                },
+                {
+                    "name": "SixthIntent",
+                    "slots": [
+                        {
+                            "name": "question",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "Sixth {question}"
+                    ]
+                },
+                {
+                    "name": "SeventhIntent",
+                    "slots": [
+                        {
+                            "name": "question",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "Seventh {question}"
+                    ]
+                },
+                {
+                    "name": "EighthIntent",
+                    "slots": [
+                        {
+                            "name": "question",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "Eighth {question}"
+                    ]
+                },
+                {
+                    "name": "NinthIntent",
+                    "slots": [
+                        {
+                            "name": "question",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "Ninth {question}"
+                    ]
+                },
+                {
+                    "name": "TenthIntent",
+                    "slots": [
+                        {
+                            "name": "question",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "Tenth {question}"
+                    ]
+                },
+                {
+                    "name": "EleventhIntent",
+                    "slots": [
+                        {
+                            "name": "question",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "eleven {question}"
+                    ]
+                },
+                {
+                    "name": "TwelfthIntent",
+                    "slots": [
+                        {
+                            "name": "question",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "twelfth {question}"
+                    ]
+                },
+                {
+                    "name": "ThirteenthIntent",
+                    "slots": [
+                        {
+                            "name": "question",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "Thirteenth {question}"
+                    ]
+                },
+                {
+                    "name": "NextIntent",
+                    "slots": [
+                        {
+                            "name": "question",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "next",
+                        "next {question}"
+                    ]
+                },
+                {
+                    "name": "PreviousIntent",
+                    "slots": [
+                        {
+                            "name": "question",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "Previous",
+                        "Previous {question}"
+                    ]
+                },
+                {
+                    "name": "RepeatIntent",
+                    "slots": [
+                        {
+                            "name": "question",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "Repeat",
+                        "Repeat {question}"
+                    ]
+                },
+                {
+                    "name": "LastIntent",
+                    "slots": [
+                        {
+                            "name": "question",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "Last",
+                        "Last {question}"
+                    ]
+                },
+                {
+                    "name": "StepIntent",
+                    "slots": [
+                        {
+                            "name": "number",
+                            "type": "AMAZON.AlphaNumeric",
+                            "multipleValues": {
+                                "enabled": false
+                            }
+                        },
+                        {
+                            "name": "question",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "Step {number}"
+                    ]
+                },
+                {
+                    "name": "YesIntent",
+                    "slots": [
+                        {
+                            "name": "question",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "Yes",
+                        "yes {question}"
+                    ]
+                },
+                {
+                    "name": "SureIntent",
+                    "slots": [
+                        {
+                            "name": "question",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "Sure",
+                        "Surely",
+                        "Sure {question}",
+                        "Surely {question}"
+                    ]
+                },
+                {
+                    "name": "PleaseIntent",
+                    "slots": [
+                        {
+                            "name": "question",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "Please",
+                        "Please {question}"
+                    ]
+                },
+                {
+                    "name": "ThankIntent",
+                    "slots": [
+                        {
+                            "name": "question",
+                            "type": "AMAZON.SearchQuery"
+                        }
+                    ],
+                    "samples": [
+                        "Thank",
+                        "Thanks",
+                        "Thank {question}",
+                        "Thanks {question}"
+                    ]
+                }
+            ],
+            "types": []
+        }
+    }
+}
